@@ -54,6 +54,7 @@ public class TodoServiceImpl implements TodoService {
 
         matchedTodoItem.setTitle(todoItem.getTitle());
         matchedTodoItem.setCompleted(todoItem.getCompleted());
+        matchedTodoItem.setPriority(todoItem.getPriority());
         todoRepository.save(matchedTodoItem);
         return matchedTodoItem;
     }
