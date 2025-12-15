@@ -10,6 +10,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.learning.in_memory_todo_list.Models.TodoItem;
 import com.learning.in_memory_todo_list.service.TodoService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +30,7 @@ public class TodoItemController {
     private TodoService todoService;
 
     @PostMapping("/todos")
-    public ResponseEntity<String> createTodo(@RequestBody TodoItem todoItem) {
+    public ResponseEntity<String> createTodo(@Valid @RequestBody TodoItem todoItem) {
         todoService.createTodo(todoItem);
         
         return new ResponseEntity<>("Todo item created", HttpStatus.CREATED);
@@ -49,7 +52,7 @@ public class TodoItemController {
     }
     
     @PutMapping("todos/{id}")
-    public ResponseEntity<String> updateTodo(@PathVariable Long id, @RequestBody TodoItem todoItem) {
+    public ResponseEntity<String> updateTodo(@PathVariable Long id, @Valid @RequestBody TodoItem todoItem) {
         try {
             todoService.updateTodo(id, todoItem);
             return new ResponseEntity<>("Todo item updated", HttpStatus.OK);
